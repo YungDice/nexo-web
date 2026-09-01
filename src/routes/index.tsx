@@ -1,21 +1,30 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FadeUp } from "@/components/FadeUp";
-import { MessageSquareLock, Globe, AtSign, Database } from "lucide-react";
+import {
+  MessageSquareLock,
+  Globe,
+  AtSign,
+  Database,
+  Linkedin,
+} from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Nexo — End-to-end encrypted messenger for Windows" },
+      { title: "deli.dev — Software built plainly in Switzerland" },
       {
         name: "description",
         content:
-          "Nexo is an open-source Windows messenger. Conversations are end-to-end encrypted with MLS (RFC 9420). The public feed is not, and Nexo says so.",
+          "deli.dev is a small Swiss development team building open-source software. Nexo, our current project, is an end-to-end encrypted messenger for Windows.",
       },
-      { property: "og:title", content: "Nexo — End-to-end encrypted messenger for Windows" },
+      {
+        property: "og:title",
+        content: "deli.dev — Software built plainly in Switzerland",
+      },
       {
         property: "og:description",
         content:
-          "Open source, MIT licensed, no phone number required. Encrypted with MLS; the feed is public and Nexo states its limits plainly.",
+          "A small Swiss team shipping open-source tools with their limits stated in plain text. Current project: Nexo, an end-to-end encrypted messenger for Windows.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -27,11 +36,18 @@ export const Route = createFileRoute("/")({
 const RELEASES = "https://github.com/YungDice/nexo/releases/latest";
 const REPO = "https://github.com/YungDice/nexo";
 const THREAT_MODEL = "https://github.com/YungDice/nexo/blob/main/docs/THREAT-MODEL.md";
+const LINKEDIN = "https://www.linkedin.com/in/deli-dev/";
 
-function PrimaryButton({ children }: { children: React.ReactNode }) {
+function PrimaryButton({
+  children,
+  href = RELEASES,
+}: {
+  children: React.ReactNode;
+  href?: string;
+}) {
   return (
     <a
-      href={RELEASES}
+      href={href}
       className="inline-flex items-center justify-center rounded-md bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-soft"
     >
       {children}
@@ -39,7 +55,13 @@ function PrimaryButton({ children }: { children: React.ReactNode }) {
   );
 }
 
-function GhostButton({ children, href }: { children: React.ReactNode; href: string }) {
+function GhostButton({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) {
   return (
     <a
       href={href}
@@ -157,32 +179,67 @@ function Index() {
       <header className="mx-auto max-w-[1100px] px-6 pt-24 pb-20 sm:pt-36 sm:pb-28">
         <FadeUp>
           <p className="text-5xl font-semibold tracking-[-0.05em] text-foreground sm:text-6xl">
-            Nexo<span className="text-accent">.</span>
+            deli.dev
           </p>
         </FadeUp>
         <FadeUp delay={80}>
           <h1 className="mt-10 max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl">
-            An end-to-end encrypted messenger for Windows.
+            Software, built plainly. From Switzerland.
           </h1>
         </FadeUp>
         <FadeUp delay={160}>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Messages are encrypted with MLS. The feed is not, and Nexo says so.
+            We ship small, open-source tools and state their limits in plain text. Nexo is our current project.
           </p>
         </FadeUp>
         <FadeUp delay={240}>
           <div className="mt-10 flex flex-wrap gap-3">
-            <PrimaryButton>Download for Windows</PrimaryButton>
-            <GhostButton href={REPO}>View source</GhostButton>
+            <PrimaryButton href="#projects">View project</PrimaryButton>
+            <GhostButton href={LINKEDIN}>Contact on LinkedIn</GhostButton>
           </div>
           <p className="mt-6 font-mono text-xs text-muted-foreground">
-            Windows 10 1809+ · MIT licensed · No phone number required
+            Based in Switzerland · No trackers · No cookies
           </p>
         </FadeUp>
       </header>
 
+      {/* Projects */}
+      <Section id="projects" eyebrow="01 — Projects" title="Selected work">
+        <FadeUp>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
+            One project at a time. Currently shipping Nexo.
+          </p>
+        </FadeUp>
+        <FadeUp delay={80}>
+          <article className="mt-12 rounded-lg border border-border bg-surface p-8 sm:p-10">
+            <h3 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              Nexo
+            </h3>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
+              An end-to-end encrypted messenger for Windows. Open source, MIT licensed, no phone number required. Messages use MLS; the feed does not, and Nexo says so.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              <span className="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground">
+                Windows
+              </span>
+              <span className="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground">
+                Open source
+              </span>
+              <span className="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground">
+                MLS encryption
+              </span>
+            </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <PrimaryButton>Download for Windows</PrimaryButton>
+              <GhostButton href={REPO}>View source</GhostButton>
+              <GhostButton href={THREAT_MODEL}>Threat model</GhostButton>
+            </div>
+          </article>
+        </FadeUp>
+      </Section>
+
       {/* What it does */}
-      <Section id="what-it-does" eyebrow="01 — Overview" title="What it does">
+      <Section id="what-it-does" eyebrow="02 — Overview" title="What Nexo does">
         <ul className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2">
           {capabilities.map(({ icon: Icon, title, body }, i) => (
             <FadeUp as="li" key={title} delay={i * 60} className="bg-surface p-8">
@@ -195,7 +252,7 @@ function Index() {
       </Section>
 
       {/* Limits */}
-      <Section id="limits" eyebrow="02 — Limits" title="What Nexo does not protect">
+      <Section id="limits" eyebrow="03 — Limits" title="What Nexo does not protect">
         <FadeUp>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
             Every messenger has limits. Most do not list them.
@@ -212,7 +269,7 @@ function Index() {
       </Section>
 
       {/* Encryption */}
-      <Section id="encryption" eyebrow="03 — Cryptography" title="How the encryption works">
+      <Section id="encryption" eyebrow="04 — Cryptography" title="How the encryption works">
         <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_minmax(0,420px)]">
           <ul className="space-y-8">
             {cryptoPoints.map((p, i) => (
@@ -244,7 +301,7 @@ function Index() {
       </Section>
 
       {/* Download */}
-      <Section id="download" eyebrow="04 — Install" title="Download">
+      <Section id="download" eyebrow="05 — Install" title="Download">
         <FadeUp>
           <div className="mt-10 flex flex-wrap gap-3">
             <PrimaryButton>Download for Windows</PrimaryButton>
@@ -265,16 +322,49 @@ function Index() {
         </FadeUp>
       </Section>
 
+      {/* Team / Contact */}
+      <Section id="contact" eyebrow="06 — Team" title="About deli.dev">
+        <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_minmax(0,420px)]">
+          <FadeUp>
+            <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
+              We are a small development team based in Switzerland. We design, build, and maintain
+              Nexo with a focus on clarity, honest limits, and code that can be inspected.
+            </p>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
+              There is no newsletter, no analytics, and no cookie banner. The site collects nothing.
+            </p>
+          </FadeUp>
+          <FadeUp delay={80}>
+            <div className="rounded-lg border border-border bg-surface p-6">
+              <h3 className="text-base font-semibold text-foreground">Get in touch</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                For questions, collaboration, or a walkthrough of the threat model, reach out on LinkedIn.
+              </p>
+              <a
+                href={LINKEDIN}
+                className="mt-6 inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
+              >
+                <Linkedin aria-hidden="true" className="h-4 w-4" />
+                Contact on LinkedIn
+              </a>
+            </div>
+          </FadeUp>
+        </div>
+      </Section>
+
       {/* Footer */}
       <footer className="border-t border-border py-12">
         <div className="mx-auto flex max-w-[1100px] flex-col gap-4 px-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>MIT licensed.</p>
+          <p>deli.dev · Switzerland</p>
           <nav className="flex flex-wrap gap-6">
             <a href={REPO} className="text-accent hover:underline">
               Source repository
             </a>
             <a href={THREAT_MODEL} className="text-accent hover:underline">
               Threat model
+            </a>
+            <a href={LINKEDIN} className="text-accent hover:underline">
+              LinkedIn
             </a>
           </nav>
         </div>

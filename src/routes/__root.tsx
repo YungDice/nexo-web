@@ -24,7 +24,7 @@ function NotFoundComponent() {
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-soft"
           >
             Go home
           </Link>
@@ -56,13 +56,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-soft"
           >
             Try again
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="inline-flex items-center justify-center rounded-md border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-surface"
           >
             Go home
           </a>
@@ -77,18 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Nexo — End-to-end encrypted messenger for Windows" },
+      { title: "deli.dev" },
       {
         name: "description",
         content:
-          "Open-source, MIT licensed Windows messenger with MLS end-to-end encryption and a plainly stated public feed.",
+          "deli.dev is a small Swiss development team building open-source software with plainly stated limits.",
       },
       { name: "color-scheme", content: "dark light" },
-      { property: "og:title", content: "Nexo — End-to-end encrypted messenger for Windows" },
+      { property: "og:title", content: "deli.dev" },
       {
         property: "og:description",
         content:
-          "Open-source, MIT licensed Windows messenger with MLS end-to-end encryption and a plainly stated public feed.",
+          "A small Swiss team shipping open-source tools with their limits stated in plain text.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
