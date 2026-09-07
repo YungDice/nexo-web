@@ -57,21 +57,21 @@ function NewsPage() {
         </Link>
 
         <FadeUp>
-          <p className="mt-12 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="mt-12 text-center font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
             News
           </p>
-          <h1 className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+          <h1 className="mx-auto mt-4 max-w-2xl text-center text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
             Updates from LinkedIn
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
+          <p className="mx-auto mt-6 max-w-xl text-center text-base leading-relaxed text-muted-foreground">
             We post progress and notes on LinkedIn. The cards below load directly from there.
           </p>
         </FadeUp>
 
-        <div className="mt-12 grid gap-8">
+        <div className="mt-12 grid justify-items-center gap-8">
           {embeds.map((embed, index) => (
             <FadeUp key={embed.src} delay={index * 0.05}>
-              <div className="max-w-[504px] overflow-hidden rounded-lg border border-border bg-surface">
+              <div className="mx-auto w-full max-w-[504px] overflow-hidden rounded-lg border border-border bg-surface">
                 <iframe
                   src={embed.src}
                   height={embed.height}
@@ -91,7 +91,7 @@ function NewsPage() {
           ))}
         </div>
 
-        <p className="mt-12 max-w-xl text-sm text-muted-foreground">
+        <p className="mx-auto mt-12 max-w-xl text-center text-sm text-muted-foreground">
           LinkedIn serves these embeds and may set cookies when you view them. We do not track you here.
         </p>
       </div>
