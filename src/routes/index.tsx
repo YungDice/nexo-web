@@ -424,6 +424,9 @@ function Index() {
               News
             </Link>
             <a href={REPO} className="text-accent hover:underline">
+              Source repository
+            </a>
+
 
             <a href={THREAT_MODEL} className="text-accent hover:underline">
               Threat model
