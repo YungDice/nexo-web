@@ -77,7 +77,7 @@ function NewsPage() {
                   height={embed.height}
                   width={embed.width}
                   frameBorder="0"
-                  allowFullScreen=""
+                  allowFullScreen
                   title="Embedded post"
                   loading="lazy"
                   className="block w-full max-w-full border-0"
