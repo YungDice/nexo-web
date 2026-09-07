@@ -68,10 +68,10 @@ function NewsPage() {
           </p>
         </FadeUp>
 
-        <div className="mt-12 grid justify-items-center gap-10">
+        <div className="mt-12 flex flex-col items-center gap-10">
           {embeds.map((embed, index) => (
-            <FadeUp key={embed.src} delay={index * 0.05}>
-              <div className="mx-auto w-full max-w-[640px] overflow-hidden rounded-lg border border-border bg-surface shadow-sm">
+            <FadeUp key={embed.src} delay={index * 0.05} className="w-full max-w-[640px]">
+              <div className="w-full overflow-hidden rounded-lg border border-border bg-surface shadow-sm">
                 <iframe
                   src={embed.src}
                   height={embed.height}
@@ -80,10 +80,9 @@ function NewsPage() {
                   allowFullScreen
                   title="Embedded post"
                   loading="lazy"
-                  className="block w-full max-w-full border-0"
+                  className="block h-auto w-full border-0"
                   style={{
                     aspectRatio: `${embed.width} / ${embed.height}`,
-                    height: "auto",
                   }}
                 />
               </div>
