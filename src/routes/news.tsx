@@ -25,23 +25,23 @@ export const Route = createFileRoute("/news")({
 const embeds = [
   {
     src: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7500513814459629569?collapsed=1",
-    height: 627,
-    width: 504,
+    height: 796,
+    width: 640,
   },
   {
     src: "https://www.linkedin.com/embed/feed/update/urn:li:share:7500824328016617472?collapsed=1",
-    height: 668,
-    width: 504,
+    height: 848,
+    width: 640,
   },
   {
     src: "https://www.linkedin.com/embed/feed/update/urn:li:share:7500823891540353024?collapsed=1",
-    height: 668,
-    width: 504,
+    height: 848,
+    width: 640,
   },
   {
     src: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7502688324067717120?collapsed=1",
-    height: 627,
-    width: 504,
+    height: 796,
+    width: 640,
   },
 ];
 
@@ -68,10 +68,10 @@ function NewsPage() {
           </p>
         </FadeUp>
 
-        <div className="mt-12 grid justify-items-center gap-8">
+        <div className="mt-12 flex flex-col items-center gap-10">
           {embeds.map((embed, index) => (
-            <FadeUp key={embed.src} delay={index * 0.05}>
-              <div className="mx-auto w-full max-w-[504px] overflow-hidden rounded-lg border border-border bg-surface">
+            <FadeUp key={embed.src} delay={index * 0.05} className="w-full max-w-[640px]">
+              <div className="w-full overflow-hidden rounded-lg border border-border bg-surface shadow-sm">
                 <iframe
                   src={embed.src}
                   height={embed.height}
@@ -80,10 +80,9 @@ function NewsPage() {
                   allowFullScreen
                   title="Embedded post"
                   loading="lazy"
-                  className="block w-full max-w-full border-0"
+                  className="block h-auto w-full border-0"
                   style={{
                     aspectRatio: `${embed.width} / ${embed.height}`,
-                    height: "auto",
                   }}
                 />
               </div>
