@@ -190,6 +190,7 @@ const STATUS_LABEL: Record<string, string> = {
 };
 
 function Roadmap() {
+  const [showAll, setShowAll] = useState(false);
   const { data, isLoading } = useQuery({
     queryKey: ["roadmap"],
     queryFn: async (): Promise<RoadmapItem[]> => {
@@ -202,6 +203,10 @@ function Roadmap() {
     },
   });
 
+  const activeItems = data?.filter((item) => item.status === "in_progress") ?? [];
+  const hasActive = activeItems.length > 0;
+  const visibleItems = !showAll && hasActive ? activeItems : (data ?? []);
+
   return (
     <div className="relative mt-14">
       {/* vertical rail */}
@@ -213,7 +218,7 @@ function Roadmap() {
         {isLoading && (
           <li className="pl-14 text-sm text-muted-foreground sm:pl-20">Loading…</li>
         )}
-        {data?.map((item, i) => {
+        {visibleItems.map((item, i) => {
           const status = item.status;
           const done = status === "done";
           const active = status === "in_progress";
@@ -269,6 +274,27 @@ function Roadmap() {
           );
         })}
       </ol>
+      {data && hasActive && (
+        <div className="mt-10 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setShowAll((s) => !s)}
+            className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 focus:ring-offset-background"
+          >
+            {showAll ? (
+              <>
+                Show only in progress
+                <ChevronUp className="h-4 w-4" aria-hidden="true" />
+              </>
+            ) : (
+              <>
+                Show all roadmap items
+                <ChevronDown className="h-4 w-4" aria-hidden="true" />
+              </>
+            )}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
