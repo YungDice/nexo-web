@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "deli.dev is a small Swiss development team building open-source software. Nexo, our current project, is an end-to-end encrypted messenger for Windows.",
+          "deli.dev is a small Swiss development team. Nexo, our current project, is an end-to-end encrypted messenger for Windows.",
       },
       {
         property: "og:title",
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "A small Swiss team shipping open-source tools with their limits stated in plain text. Current project: Nexo, an end-to-end encrypted messenger for Windows.",
+          "A small Swiss team shipping software with its limits stated in plain text. Current project: Nexo, an end-to-end encrypted messenger for Windows.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -37,9 +37,7 @@ export const Route = createFileRoute("/")({
 });
 
 const RELEASES = "https://github.com/YungDice/nexo/releases/latest";
-const REPO = "https://github.com/YungDice/nexo";
-const THREAT_MODEL = "https://github.com/YungDice/nexo/blob/main/docs/THREAT-MODEL.md";
-const LINKEDIN = "https://www.linkedin.com/in/deli-dev/";
+const LINKEDIN = "https://www.linkedin.com/company/146215767";
 
 function PrimaryButton({
   children,
@@ -241,7 +239,7 @@ function Index() {
         </FadeUp>
         <FadeUp delay={160}>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            We ship small, open-source tools and state their limits in plain text. Nexo is our current project.
+            We ship small, carefully built tools and state their limits in plain text. Nexo is our current project.
           </p>
         </FadeUp>
         <FadeUp delay={240}>
@@ -268,14 +266,14 @@ function Index() {
               Nexo
             </h3>
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-              An end-to-end encrypted messenger for Windows. Open source, MIT licensed, no phone number required. Messages use MLS; the feed does not, and Nexo says so.
+              An end-to-end encrypted messenger for Windows. No phone number required. Messages use MLS; the feed does not, and Nexo says so.
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               <span className="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground">
                 Windows
               </span>
               <span className="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground">
-                Open source
+                Private source
               </span>
               <span className="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground">
                 MLS encryption
@@ -283,8 +281,6 @@ function Index() {
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
               <PrimaryButton>Download for Windows</PrimaryButton>
-              <GhostButton href={REPO}>View source</GhostButton>
-              <GhostButton href={THREAT_MODEL}>Threat model</GhostButton>
             </div>
           </article>
         </FadeUp>
@@ -357,7 +353,6 @@ function Index() {
         <FadeUp>
           <div className="mt-10 flex flex-wrap gap-3">
             <PrimaryButton>Download for Windows</PrimaryButton>
-            <GhostButton href={REPO}>View source</GhostButton>
           </div>
         </FadeUp>
         <FadeUp delay={80}>
@@ -394,14 +389,14 @@ function Index() {
               Nexo with a focus on clarity, honest limits, and code that can be inspected.
             </p>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-              There is no newsletter, no analytics, and no cookie banner. The site collects nothing.
+              There is no newsletter and no cookie banner. The site collects nothing.
             </p>
           </FadeUp>
           <FadeUp delay={80}>
             <div className="rounded-lg border border-border bg-surface p-6">
               <h3 className="text-base font-semibold text-foreground">Get in touch</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                For questions, collaboration, or a walkthrough of the threat model, reach out on LinkedIn.
+                For questions, collaboration, or a walkthrough of how Nexo works, reach out on LinkedIn.
               </p>
               <a
                 href={LINKEDIN}
@@ -423,14 +418,6 @@ function Index() {
             <Link to="/news" className="text-accent hover:underline">
               News
             </Link>
-            <a href={REPO} className="text-accent hover:underline">
-              Source repository
-            </a>
-
-
-            <a href={THREAT_MODEL} className="text-accent hover:underline">
-              Threat model
-            </a>
             <a href={LINKEDIN} className="text-accent hover:underline">
               LinkedIn
             </a>
