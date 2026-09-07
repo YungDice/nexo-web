@@ -374,8 +374,19 @@ function Index() {
         </FadeUp>
       </Section>
 
+      {/* Roadmap */}
+      <Section id="roadmap" eyebrow="06 — Roadmap" title="What we are working on next">
+        <FadeUp>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
+            Planned work, in the order we intend to do it. No dates are promised.
+          </p>
+        </FadeUp>
+        <Roadmap />
+      </Section>
+
       {/* Team / Contact */}
-      <Section id="contact" eyebrow="06 — Team" title="About deli.dev">
+      <Section id="contact" eyebrow="07 — Team" title="About deli.dev">
+
         <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_minmax(0,420px)]">
           <FadeUp>
             <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
