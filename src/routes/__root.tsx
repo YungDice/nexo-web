@@ -81,14 +81,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "deli.dev is a small Swiss development team building open-source software with plainly stated limits.",
+          "deli.dev is a small Swiss development team building software with plainly stated limits.",
       },
       { name: "color-scheme", content: "dark light" },
       { property: "og:title", content: "deli.dev" },
       {
         property: "og:description",
         content:
-          "A small Swiss team shipping open-source tools with their limits stated in plain text.",
+          "A small Swiss team shipping software with its limits stated in plain text.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
