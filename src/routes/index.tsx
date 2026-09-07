@@ -223,7 +223,7 @@ function Roadmap() {
           const done = status === "done";
           const active = status === "in_progress";
           return (
-            <FadeUp as="li" key={item.id} delay={i * 70} className="relative pl-14 sm:pl-20">
+            <li key={item.id} className="relative pl-14 sm:pl-20">
               {/* node */}
               <span
                 aria-hidden="true"
@@ -270,7 +270,7 @@ function Roadmap() {
                   </p>
                 )}
               </article>
-            </FadeUp>
+            </li>
           );
         })}
       </ol>
