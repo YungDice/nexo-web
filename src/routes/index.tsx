@@ -1,4 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { FadeUp } from "@/components/FadeUp";
 import {
   MessageSquareLock,
@@ -7,6 +9,7 @@ import {
   Database,
   Linkedin,
 } from "lucide-react";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -172,9 +175,58 @@ function Section({
   );
 }
 
+type RoadmapItem = {
+  id: string;
+  title: string;
+  description: string;
+  status: string;
+};
+
+const STATUS_LABEL: Record<string, string> = {
+  planned: "Planned",
+  in_progress: "In progress",
+  done: "Shipped",
+};
+
+function Roadmap() {
+  const { data, isLoading } = useQuery({
+    queryKey: ["roadmap"],
+    queryFn: async (): Promise<RoadmapItem[]> => {
+      const { data, error } = await supabase
+        .from("roadmap_items")
+        .select("id,title,description,status")
+        .order("position", { ascending: true });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+
+  return (
+    <ul className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2">
+      {isLoading && (
+        <li className="bg-surface p-8 text-sm text-muted-foreground">Loading…</li>
+      )}
+      {data?.map((item, i) => (
+        <FadeUp as="li" key={item.id} delay={i * 60} className="bg-surface p-8">
+          <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+            {STATUS_LABEL[item.status] ?? item.status}
+          </p>
+          <h3 className="mt-4 text-base font-semibold text-foreground">{item.title}</h3>
+          {item.description && (
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {item.description}
+            </p>
+          )}
+        </FadeUp>
+      ))}
+    </ul>
+  );
+}
+
 function Index() {
   return (
     <main className="min-h-screen bg-background">
+
       {/* Hero */}
       <header className="mx-auto max-w-[1100px] px-6 pt-24 pb-20 sm:pt-36 sm:pb-28">
         <FadeUp>
@@ -322,8 +374,19 @@ function Index() {
         </FadeUp>
       </Section>
 
+      {/* Roadmap */}
+      <Section id="roadmap" eyebrow="06 — Roadmap" title="What we are working on next">
+        <FadeUp>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
+            Planned work, in the order we intend to do it. No dates are promised.
+          </p>
+        </FadeUp>
+        <Roadmap />
+      </Section>
+
       {/* Team / Contact */}
-      <Section id="contact" eyebrow="06 — Team" title="About deli.dev">
+      <Section id="contact" eyebrow="07 — Team" title="About deli.dev">
+
         <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_minmax(0,420px)]">
           <FadeUp>
             <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
@@ -357,9 +420,14 @@ function Index() {
         <div className="mx-auto flex max-w-[1100px] flex-col gap-4 px-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>deli.dev · Switzerland</p>
           <nav className="flex flex-wrap gap-6">
+            <Link to="/news" className="text-accent hover:underline">
+              News
+            </Link>
             <a href={REPO} className="text-accent hover:underline">
               Source repository
             </a>
+
+
             <a href={THREAT_MODEL} className="text-accent hover:underline">
               Threat model
             </a>
