@@ -420,9 +420,11 @@ function Index() {
         <div className="mx-auto flex max-w-[1100px] flex-col gap-4 px-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>deli.dev · Switzerland</p>
           <nav className="flex flex-wrap gap-6">
+            <Link to="/news" className="text-accent hover:underline">
+              News
+            </Link>
             <a href={REPO} className="text-accent hover:underline">
-              Source repository
-            </a>
+
             <a href={THREAT_MODEL} className="text-accent hover:underline">
               Threat model
             </a>
