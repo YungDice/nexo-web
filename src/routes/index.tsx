@@ -441,7 +441,30 @@ function Index() {
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
               There is no newsletter and no cookie banner. The site collects nothing.
             </p>
+            <ul className="mt-10 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2">
+              <li className="bg-surface p-6">
+                <p className="text-base font-semibold text-foreground">bananaaboy</p>
+                <p className="mt-1 font-mono text-xs uppercase tracking-[0.18em] text-accent">
+                  Frontend
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  Owns the interface and the end-user experience — encryption nobody can figure out
+                  how to use protects nobody.
+                </p>
+              </li>
+              <li className="bg-surface p-6">
+                <p className="text-base font-semibold text-foreground">yung dice</p>
+                <p className="mt-1 font-mono text-xs uppercase tracking-[0.18em] text-accent">
+                  Backend
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  Drives the backend and cryptographic architecture that makes “we can’t read it” a
+                  structural guarantee rather than a promise.
+                </p>
+              </li>
+            </ul>
           </FadeUp>
+
           <FadeUp delay={80}>
             <div className="rounded-lg border border-border bg-surface p-6">
               <h3 className="text-base font-semibold text-foreground">Get in touch</h3>
