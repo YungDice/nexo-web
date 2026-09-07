@@ -200,26 +200,76 @@ function Roadmap() {
   });
 
   return (
-    <ul className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2">
-      {isLoading && (
-        <li className="bg-surface p-8 text-sm text-muted-foreground">Loading…</li>
-      )}
-      {data?.map((item, i) => (
-        <FadeUp as="li" key={item.id} delay={i * 60} className="bg-surface p-8">
-          <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
-            {STATUS_LABEL[item.status] ?? item.status}
-          </p>
-          <h3 className="mt-4 text-base font-semibold text-foreground">{item.title}</h3>
-          {item.description && (
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {item.description}
-            </p>
-          )}
-        </FadeUp>
-      ))}
-    </ul>
+    <div className="relative mt-14">
+      {/* vertical rail */}
+      <span
+        aria-hidden="true"
+        className="absolute left-[15px] top-2 bottom-2 w-px bg-gradient-to-b from-accent/60 via-border to-transparent sm:left-[19px]"
+      />
+      <ol className="space-y-6">
+        {isLoading && (
+          <li className="pl-14 text-sm text-muted-foreground sm:pl-20">Loading…</li>
+        )}
+        {data?.map((item, i) => {
+          const status = item.status;
+          const done = status === "done";
+          const active = status === "in_progress";
+          return (
+            <FadeUp as="li" key={item.id} delay={i * 70} className="relative pl-14 sm:pl-20">
+              {/* node */}
+              <span
+                aria-hidden="true"
+                className={[
+                  "absolute left-0 top-6 flex h-8 w-8 items-center justify-center rounded-full border font-mono text-xs sm:h-10 sm:w-10 sm:text-sm",
+                  done
+                    ? "border-accent bg-accent text-accent-foreground"
+                    : active
+                      ? "border-accent bg-background text-accent shadow-[0_0_0_4px_color-mix(in_oklab,var(--color-accent)_18%,transparent)]"
+                      : "border-border bg-surface text-muted-foreground",
+                ].join(" ")}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+
+              <article className="group rounded-lg border border-border bg-surface p-6 transition-colors hover:border-accent/50 sm:p-8">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span
+                    className={[
+                      "inline-flex items-center gap-2 rounded-full px-3 py-1 font-mono text-[11px] uppercase tracking-[0.16em]",
+                      done
+                        ? "bg-accent/15 text-accent"
+                        : active
+                          ? "bg-accent/10 text-accent-soft"
+                          : "bg-foreground/[0.06] text-muted-foreground",
+                    ].join(" ")}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={[
+                        "h-1.5 w-1.5 rounded-full",
+                        done || active ? "bg-accent" : "bg-muted-foreground",
+                      ].join(" ")}
+                    />
+                    {STATUS_LABEL[status] ?? status}
+                  </span>
+                </div>
+                <h3 className="mt-4 text-lg font-semibold tracking-tight text-foreground sm:text-xl">
+                  {item.title}
+                </h3>
+                {item.description && (
+                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                    {item.description}
+                  </p>
+                )}
+              </article>
+            </FadeUp>
+          );
+        })}
+      </ol>
+    </div>
   );
 }
+
 
 function Index() {
   return (
