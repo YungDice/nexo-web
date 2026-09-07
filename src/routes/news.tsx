@@ -1,6 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { FadeUp } from "@/components/FadeUp";
 
 export const Route = createFileRoute("/news")({
@@ -10,12 +8,12 @@ export const Route = createFileRoute("/news")({
       {
         name: "description",
         content:
-          "Release notes and progress updates from deli.dev, the small Swiss team building Nexo.",
+          "Latest updates from deli.dev, the small Swiss team building Nexo.",
       },
       { property: "og:title", content: "News — deli.dev" },
       {
         property: "og:description",
-        content: "Release notes and progress updates from the team building Nexo.",
+        content: "Latest updates from the team building Nexo.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -24,39 +22,37 @@ export const Route = createFileRoute("/news")({
   component: NewsPage,
 });
 
-type NewsPost = {
-  id: string;
-  title: string;
-  body: string;
-  published: boolean;
-  published_at: string;
-};
-
-function formatDate(value: string) {
-  return new Date(value).toLocaleDateString("en-GB", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
+const embeds = [
+  {
+    src: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7500513814459629569?collapsed=1",
+    height: 627,
+    width: 504,
+  },
+  {
+    src: "https://www.linkedin.com/embed/feed/update/urn:li:share:7500824328016617472?collapsed=1",
+    height: 668,
+    width: 504,
+  },
+  {
+    src: "https://www.linkedin.com/embed/feed/update/urn:li:share:7500823891540353024?collapsed=1",
+    height: 668,
+    width: 504,
+  },
+  {
+    src: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7502688324067717120?collapsed=1",
+    height: 627,
+    width: 504,
+  },
+];
 
 function NewsPage() {
-  const posts = useQuery({
-    queryKey: ["news"],
-    queryFn: async (): Promise<NewsPost[]> => {
-      const { data, error } = await supabase
-        .from("news_posts")
-        .select("id,title,body,published,published_at")
-        .order("published_at", { ascending: false });
-      if (error) throw error;
-      return data ?? [];
-    },
-  });
-
   return (
     <main className="min-h-screen bg-background">
       <div className="mx-auto max-w-[1100px] px-6 pt-20 pb-24 sm:pt-28">
-        <Link to="/" className="font-mono text-xs text-muted-foreground hover:text-accent">
+        <Link
+          to="/"
+          className="font-mono text-xs text-muted-foreground hover:text-accent"
+        >
           ← deli.dev
         </Link>
 
@@ -65,32 +61,39 @@ function NewsPage() {
             News
           </p>
           <h1 className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            What we shipped, and when
+            Updates from LinkedIn
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-            Release notes and progress updates. Nothing here is a promise of a date.
+            We post progress and notes on LinkedIn. The cards below load directly from there.
           </p>
         </FadeUp>
 
-        <div className="mt-12 space-y-px overflow-hidden rounded-lg border border-border bg-border">
-          {posts.isLoading && (
-            <p className="bg-surface p-8 text-sm text-muted-foreground">Loading…</p>
-          )}
-          {posts.data?.length === 0 && (
-            <p className="bg-surface p-8 text-sm text-muted-foreground">No posts yet.</p>
-          )}
-          {posts.data?.map((post) => (
-            <article key={post.id} className="bg-surface p-8">
-              <p className="font-mono text-xs text-muted-foreground">
-                {formatDate(post.published_at)}
-              </p>
-              <h2 className="mt-3 text-lg font-semibold text-foreground">{post.title}</h2>
-              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
-                {post.body}
-              </p>
-            </article>
+        <div className="mt-12 grid gap-8">
+          {embeds.map((embed, index) => (
+            <FadeUp key={embed.src} delay={index * 0.05}>
+              <div className="max-w-[504px] overflow-hidden rounded-lg border border-border bg-surface">
+                <iframe
+                  src={embed.src}
+                  height={embed.height}
+                  width={embed.width}
+                  frameBorder="0"
+                  allowFullScreen=""
+                  title="Embedded post"
+                  loading="lazy"
+                  className="block w-full max-w-full border-0"
+                  style={{
+                    aspectRatio: `${embed.width} / ${embed.height}`,
+                    height: "auto",
+                  }}
+                />
+              </div>
+            </FadeUp>
           ))}
         </div>
+
+        <p className="mt-12 max-w-xl text-sm text-muted-foreground">
+          LinkedIn serves these embeds and may set cookies when you view them. We do not track you here.
+        </p>
       </div>
     </main>
   );
