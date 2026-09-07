@@ -25,23 +25,23 @@ export const Route = createFileRoute("/news")({
 const embeds = [
   {
     src: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7500513814459629569?collapsed=1",
-    height: 627,
-    width: 504,
+    height: 796,
+    width: 640,
   },
   {
     src: "https://www.linkedin.com/embed/feed/update/urn:li:share:7500824328016617472?collapsed=1",
-    height: 668,
-    width: 504,
+    height: 848,
+    width: 640,
   },
   {
     src: "https://www.linkedin.com/embed/feed/update/urn:li:share:7500823891540353024?collapsed=1",
-    height: 668,
-    width: 504,
+    height: 848,
+    width: 640,
   },
   {
     src: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7502688324067717120?collapsed=1",
-    height: 627,
-    width: 504,
+    height: 796,
+    width: 640,
   },
 ];
 

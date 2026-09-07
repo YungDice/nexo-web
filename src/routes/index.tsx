@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { FadeUp } from "@/components/FadeUp";
 import {
@@ -8,6 +9,8 @@ import {
   AtSign,
   Database,
   Linkedin,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 
 
